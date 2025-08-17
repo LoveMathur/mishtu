@@ -109,7 +109,7 @@
         let attempts = 0;
 
         // Replace with your image URL
-        const hintImageUrl = "https://via.placeholder.com/150";
+        const hintImageUrl = "bholiBangalan.jpeg";
 
         loginForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -117,8 +117,8 @@
             const password = document.getElementById('password').value;
 
             // Simple check (replace with your own logic)
-            if (username === "user" && password === "pass") {
-                window.location.href = "page2.html"; // Redirect on success
+            if (username === "bholiBangalan" && password === "mishtuXdushtu") {
+                window.location.href = "page1.html"; // Redirect on success
             } else {
                 attempts++;
                 errorMsg.textContent = "Invalid credentials. Try again.";
@@ -132,7 +132,7 @@
             // Download the image
             const link = document.createElement('a');
             link.href = hintImageUrl;
-            link.download = 'hint.png';
+            link.download = 'bholiBangalan.jpeg';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
