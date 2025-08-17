@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            background: linear-gradient(135deg, #ffb6b9 0%, #fae3d9 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: #fff0f6;
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(255, 105, 180, 0.15);
+            max-width: 340px;
+            margin: auto;
+            padding: 32px 24px;
+            text-align: center;
+            position: relative;
+        }
+        h2 {
+            color: #e75480;
+            margin-bottom: 24px;
+            font-size: 2em;
+        }
+        label {
+            color: #e75480;
+            font-weight: bold;
+            margin-bottom: 6px;
+            display: block;
+            text-align: left;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 18px;
+            border: 1px solid #e75480;
+            border-radius: 8px;
+            background: #fff;
+            font-size: 1em;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            border-color: #ffb6b9;
+            outline: none;
+        }
+        button[type="submit"], .hint-btn {
+            background: linear-gradient(90deg, #e75480 60%, #ffb6b9 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 24px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        button[type="submit"]:hover, .hint-btn:hover {
+            background: linear-gradient(90deg, #ffb6b9 60%, #e75480 100%);
+        }
+        .hint-btn {
+            display: none;
+            margin-top: 10px;
+        }
+        .error {
+            color: #e75480;
+            margin-top: 12px;
+            font-size: 1em;
+        }
+        /* Decorative hearts */
+        .hearts {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            color: #e75480;
+            pointer-events: none;
+            user-select: none;
+        }
+    </style>
+    <!-- Optional: Romantic font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script:700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="hearts">✊🏼🍆💧</div>
+        <h2>Login💋😩</h2>
+        <form id="loginForm">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Submit</button>
+        </form>
+        <button id="hintBtn" class="hint-btn">Hint</button>
+        <div id="errorMsg" class="error"></div>
+    </div>
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const hintBtn = document.getElementById('hintBtn');
+        const errorMsg = document.getElementById('errorMsg');
+        let attempts = 0;
+
+        // Replace with your image URL
+        const hintImageUrl = "https://via.placeholder.com/150";
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Simple check (replace with your own logic)
+            if (username === "user" && password === "pass") {
+                window.location.href = "page2.html"; // Redirect on success
+            } else {
+                attempts++;
+                errorMsg.textContent = "Invalid credentials. Try again.";
+                if (attempts >= 3) {
+                    hintBtn.style.display = "inline-block";
+                }
+            }
+        });
+
+        hintBtn.addEventListener('click', function() {
+            // Download the image
+            const link = document.createElement('a');
+            link.href = hintImageUrl;
+            link.download = 'hint.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+</body>
+</html>
