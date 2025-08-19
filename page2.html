@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love Letters</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at 70% 20%, #ffe4e1 0%, #ffb6b9 60%, #fae3d9 100%);
+      font-family: 'Quicksand', 'Segoe UI', Arial, sans-serif;
+      color: #ad1457;
+      overflow-x: hidden;
+    }
+    .envelope {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px 0 rgba(255, 23, 68, 0.18);
+      max-width: 400px;
+      margin: 60px auto 0 auto;
+      padding: 36px 28px 28px 28px;
+      position: relative;
+      text-align: center;
+      transition: box-shadow 0.3s;
+    }
+    .envelope:hover {
+      box-shadow: 0 12px 40px 0 rgba(255, 23, 68, 0.28);
+    }
+    h1 {
+      font-family: 'Dancing Script', cursive, Arial, sans-serif;
+      font-size: 2.5em;
+      color: #e75480;
+      margin-bottom: 0.2em;
+      letter-spacing: 1px;
+    }
+    .letter {
+      font-size: 1.2em;
+      margin-bottom: 1.5em;
+      color: #ad1457;
+      line-height: 1.6;
+    }
+    .rose {
+      width: 60px;
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      filter: drop-shadow(0 2px 8px #e75480);
+      transition: transform 0.3s;
+    }
+    .envelope:hover .rose {
+      transform: translateX(-50%) scale(1.1) rotate(-10deg);
+    }
+    .signature {
+      margin-top: 2em;
+      font-size: 1.1em;
+      color: #c2185b;
+      font-style: italic;
+      text-shadow: 1px 1px 2px #fff;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #e75480;
+      font-size: 1em;
+      opacity: 0.7;
+    }
+    /* Easter egg button */
+    .egg-btn {
+      background: linear-gradient(90deg, #e75480 60%, #ffb6b9 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 18px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 18px;
+      transition: background 0.2s;
+      box-shadow: 0 2px 8px #fae3d9;
+      opacity: 0.7;
+    }
+    .egg-btn:hover {
+      background: linear-gradient(90deg, #ffb6b9 60%, #e75480 100%);
+      opacity: 1;
+    }
+    /* Hidden message */
+    #egg-message {
+      display: none;
+      margin-top: 18px;
+      font-size: 1.1em;
+      color: #c2185b;
+      background: #fff0f6;
+      border-radius: 8px;
+      padding: 12px;
+      box-shadow: 0 2px 8px #e75480;
+      animation: fadeIn 1s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    /* Hidden heart trail easter egg */
+    .trail-heart {
+      position: fixed;
+      width: 24px;
+      height: 24px;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 24px;
+      animation: pop 0.7s forwards;
+    }
+    @keyframes pop {
+      0% { transform: scale(0.5); opacity: 0.7; }
+      60% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); opacity: 0; }
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css?family=Dancing+Script:700|Quicksand:500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="envelope">
+    <img src="https://img.icons8.com/emoji/96/rose-emoji.png" alt="Rose" class="rose">
+    <h1>Love Letter</h1>
+    <div class="letter">
+      My dearest,<br>
+      Every moment with you feels like a gentle sunrise, painting my world in colors I never knew existed.<br>
+      Your laughter is my favorite melody, and your smile is the light that guides me home.<br>
+      Thank you for being my everything.<br>
+      <span style="opacity:0.5;">(P.S. Sometimes, the sweetest surprises are hidden in plain sight.)</span>
+    </div>
+    <button class="egg-btn" id="egg-btn">Open Secret</button>
+    <div id="egg-message">
+      <b>🌹 You found the secret!</b><br>
+      "I love you more than there are stars in the sky.<br>
+      If you click and drag your mouse, you’ll leave a trail of hearts behind. 💖"
+    </div>
+    <div class="signature">
+      Yours forever,<br>
+      The Hopeless Romantic
+    </div>
+  </div>
+  <div class="footer">
+    Made with <span style="color:#ff1744;">♥</span> just for you.
+  </div>
+  <script>
+    // Easter egg button logic
+    document.getElementById('egg-btn').addEventListener('click', function() {
+      document.getElementById('egg-message').style.display = 'block';
+      this.style.display = 'none';
+    });
+
+    // Heart trail easter egg
+    let trailActive = false;
+    document.getElementById('egg-message').addEventListener('mouseover', function() {
+      trailActive = true;
+    });
+    document.getElementById('egg-message').addEventListener('mouseout', function() {
+      trailActive = false;
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (trailActive) {
+        const heart = document.createElement('div');
+        heart.className = 'trail-heart';
+        heart.style.left = (e.pageX - 12) + 'px';
+        heart.style.top = (e.pageY - 12) + 'px';
+        heart.textContent = '💖';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 700);
+      }
+    });
+
+    // Another hidden easter egg: press "L" key for a surprise
+    document.addEventListener('keydown', function(e) {
+      if (e.key.toLowerCase() === 'l') {
+        alert('You pressed "L" for Love!\nHere’s a virtual hug 🤗');
+      }
+    });
+  </script>
+</body>
+</html>
